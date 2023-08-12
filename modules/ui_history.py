@@ -86,6 +86,7 @@ class HistoryKeys:
     Z_Values = "Z Values"
     Fixed_Z_Values = "Fixed Z Values"
     Version = "Version"
+    User = "User"
 
 
 def ceil(a: int, b: int) -> int:

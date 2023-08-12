@@ -29,6 +29,7 @@ from ldm.models.diffusion.ddpm import LatentDepth2ImageDiffusion
 
 from einops import repeat, rearrange
 from blendmodes.blend import blendLayers, BlendType
+from modules.ui_history import write_history
 
 
 # some of those options should not be changed at all because they would break the model, so I removed them from options.
@@ -785,11 +786,13 @@ def process_images_inner(p: StableDiffusionProcessing) -> Processed:
 
                 image = apply_overlay(image, p.paste_to, i, p.overlay_images)
 
-                if opts.samples_save and not p.do_not_save_samples:
-                    images.save_image(image, p.outpath_samples, "", p.seeds[i], p.prompts[i], opts.samples_format, info=infotext(n, i), p=p)
-
                 text = infotext(n, i)
                 infotexts.append(text)
+
+                if opts.samples_save and not p.do_not_save_samples:
+                    save_image_result = images.save_image(image, p.outpath_samples, "", p.seeds[i], p.prompts[i], opts.samples_format, info=infotext(n, i), p=p)
+                    write_history(save_image_result[0], text)
+
                 if opts.enable_pnginfo:
                     image.info["parameters"] = text
                 output_images.append(image)

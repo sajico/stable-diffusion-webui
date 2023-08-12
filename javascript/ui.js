@@ -385,3 +385,15 @@ function switchWidthHeight(tabname) {
     updateInput(height);
     return [];
 }
+
+
+function click_txt2img_paste() {
+    gradioApp().querySelector('#tabs').querySelectorAll('button')[0].click();
+    gradioApp().querySelectorAll('#paste')[0].click();
+}
+
+function click_img2img_paste() {
+    gradioApp().querySelector('#tabs').querySelectorAll('button')[1].click();
+    gradioApp().getElementById('mode_img2img').querySelectorAll('button')[0].click();
+    gradioApp().querySelectorAll('#paste')[1].click();
+}

@@ -19,6 +19,7 @@ __pycache__
 /embeddings
 /styles.csv
 /params.txt
+/history.jsonl
 /styles.csv.bak
 /webui-user.bat
 /webui-user.sh

@@ -138,12 +138,12 @@ def create_history_line(imagepath: str, infotext: str) -> str:
     infotext_split = infotext.splitlines()
     infoparams = map(
         lambda v: str(v).split(colon + space, 1),
-        str(infotext_split[2]).split(comma + space),
+        str(infotext_split[-1]).split(comma + space),
     )
     history = {
         HistoryKeys.FullFn: imagepath,
         HistoryKeys.Prompt: infotext_split[0],
-        HistoryKeys.Negative_Prompt: str(infotext_split[1]).split(colon + space)[1],
+        HistoryKeys.Negative_Prompt: str(infotext_split[1]).split(colon + space)[1] if len(infotext_split) == 3 else '',
         **dict(infoparams),
     }
     return json.dumps(history)
